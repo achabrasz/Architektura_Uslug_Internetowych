@@ -3,16 +3,16 @@ package org.example;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.io.Serializable;
 
 @Builder
 @Data
-@EqualsAndHashCode
-class Element implements Serializable {
+class Sportsman implements Serializable {
     private String name;
-    private int value;
-    private Category category;
+    private int rating;
+    private Sport sport;
 
     @Override
     public int hashCode() {
@@ -22,13 +22,13 @@ class Element implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Element)) return false;
-        Element other = (Element) obj;
+        if (!(obj instanceof Sportsman)) return false;
+        Sportsman other = (Sportsman) obj;
         return this.name.equals(other.name);
     }
 
     @Override
     public String toString() {
-        return "Element: " + name + ", Value: " + value;
+        return "Sportsman: " + name + ", Rating: " + rating;
     }
 }

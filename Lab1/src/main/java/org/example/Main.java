@@ -10,122 +10,166 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException{
-        List<Category> categories = createData();
+        List<Sport> sports = createData();
 
         System.out.println("Task 2");
-        task2(categories);
+        task2(sports);
 
         System.out.println();
 
         System.out.println("Task 3");
-        Set<Element> allElements = task3(categories);
+        Set<Sportsman> allSportsmen = task3(sports);
 
         System.out.println();
 
         System.out.println("Task 4");
-        task4(allElements);
+        task4(allSportsmen);
 
         System.out.println();
 
         System.out.println("Task 5");
-        task5(allElements);
+        task5(allSportsmen);
 
         System.out.println();
 
         System.out.println("Task 6");
-        task6(categories);
+        task6(sports);
 
         System.out.println();
 
         System.out.println("Task 7");
-        task7(categories);
+        task7(sports);
     }
 
-    static List<Category> createData() {
-        Category category1 = new Category();
-        category1.setName("Category 1");
+    private static List<Sport> createData() {
+        Sport sport1 = new Sport();
+        sport1.setName("Football");
 
-        Category category2 = new Category();
-        category2.setName("Category 2");
+        List<Sportsman> sportsmen1 = new ArrayList<>();
+        sportsmen1.add(new Sportsman("Cristiano Ronaldo", 95, sport1));
+        sportsmen1.add(new Sportsman("Robert Lewandowski", 94, sport1));
+        sportsmen1.add(new Sportsman("Leo Messi", 94, sport1));
+        sportsmen1.add(new Sportsman("Neymar", 91, sport1));
+        sportsmen1.add(new Sportsman("Kylian Mbappe", 92, sport1));
 
-        List<Element> elements1 = new ArrayList<>();
-        elements1.add(new Element("Element A", 25, category1));
-        elements1.add(new Element("Element B", 20, category1));
+        sport1.setSportsmen(sportsmen1);
 
-        List<Element> elements2 = new ArrayList<>();
-        elements2.add(new Element("Element C", 15, category2));
-        elements2.add(new Element("Element D", 10, category2));
+        Sport sport2 = new Sport();
+        sport2.setName("Basketball");
 
-        category1.setElements(elements1);
-        category2.setElements(elements2);
+        List<Sportsman> sportsmen2 = new ArrayList<>();
+        sportsmen2.add(new Sportsman("Lebron James", 95, sport2));
+        sportsmen2.add(new Sportsman("Steph Curry", 94, sport2));
+        sportsmen2.add(new Sportsman("Michael Jordan", 94, sport2));
+        sportsmen2.add(new Sportsman("Kobe Bryant", 93, sport2));
+        sportsmen2.add(new Sportsman("Shaquille O'Neal", 91, sport2));
 
-        List<Category> categories = new ArrayList<>();
-        categories.add(category1);
-        categories.add(category2);
+        sport2.setSportsmen(sportsmen2);
 
-        return categories;
+        Sport sport3 = new Sport();
+        sport3.setName("Tennis");
+
+        List<Sportsman> sportsmen3 = new ArrayList<>();
+        sportsmen3.add(new Sportsman("Roger Federer", 96, sport3));
+        sportsmen3.add(new Sportsman("Rafael Nadal", 95, sport3));
+        sportsmen3.add(new Sportsman("Novak Djokovic", 97, sport3));
+        sportsmen3.add(new Sportsman("Andy Murray", 90, sport3));
+
+        sport3.setSportsmen(sportsmen3);
+
+        Sport sport4 = new Sport();
+        sport4.setName("Ice Hockey");
+
+        List<Sportsman> sportsmen4 = new ArrayList<>();
+        sportsmen4.add(new Sportsman("Wayne Gretzky", 99, sport4));
+        sportsmen4.add(new Sportsman("Sidney Crosby", 96, sport4));
+        sportsmen4.add(new Sportsman("Alexander Ovechkin", 95, sport4));
+        sportsmen4.add(new Sportsman("Mario Lemieux", 97, sport4));
+        sportsmen4.add(new Sportsman("Patrick Roy", 93, sport4));
+
+        sport4.setSportsmen(sportsmen4);
+
+        Sport sport5 = new Sport();
+        sport5.setName("Swimming");
+
+        List<Sportsman> sportsmen5 = new ArrayList<>();
+        sportsmen5.add(new Sportsman("Michael Phelps", 99, sport5));
+        sportsmen5.add(new Sportsman("Ryan Lochte", 93, sport5));
+        sportsmen5.add(new Sportsman("Caeleb Dressel", 94, sport5));
+        sportsmen5.add(new Sportsman("Katie Ledecky", 95, sport5));
+
+        sport5.setSportsmen(sportsmen5);
+
+        List<Sport> sports = new ArrayList<>();
+        sports.add(sport1);
+        sports.add(sport2);
+        sports.add(sport3);
+        sports.add(sport4);
+        sports.add(sport5);
+
+        return sports;
     }
 
-    private static void task2(List<Category> categories) {
-        categories.forEach(category -> {
-            System.out.println(category);
-            category.getElements().forEach(System.out::println);
+    private static void task2(List<Sport> sports) {
+        sports.forEach(sport -> {
+            System.out.println(sport);
+            sport.getSportsmen().forEach(System.out::println);
         });
     }
 
-    private static Set<Element> task3(List<Category> categories) {
-        Set<Element> allElements = categories.stream()
-                .flatMap(category -> category.getElements().stream())
+    private static Set<Sportsman> task3(List<Sport> sports) {
+        Set<Sportsman> allSportsmen = sports.stream()
+                .flatMap(sport -> sport.getSportsmen().stream())
                 .collect(Collectors.toSet());
 
-        allElements.forEach(System.out::println);
+        allSportsmen.forEach(System.out::println);
 
-        return allElements;
+        return allSportsmen;
     }
 
-    private static void task4(Set<Element> allElements) {
-        allElements.stream()
-                .filter(element -> element.getValue() > 15)
-                .sorted(Comparator.comparing(Element::getName))
+    private static void task4(Set<Sportsman> allSportsmen) {
+        allSportsmen.stream()
+                .filter(sportsman -> sportsman.getRating() > 94)
+                .sorted(Comparator.comparing(Sportsman::getName))
                 .forEach(System.out::println);
     }
 
-    private static void task5(Set<Element> allElements) {
-        List<ElementDto> dtoList = allElements.stream()
-                .map(element -> ElementDto.builder()
-                        .name(element.getName())
-                        .value(element.getValue())
-                        .categoryName(element.getCategory().getName())
+    private static void task5(Set<Sportsman> allSportsmen) {
+        List<SportsmanDto> dtoList = allSportsmen.stream()
+                .map(sportsman -> SportsmanDto.builder()
+                        .name(sportsman.getName())
+                        .rating(sportsman.getRating())
+                        .sport(sportsman.getSport().getName())
                         .build())
-                .sorted(Comparator.comparing(ElementDto::getName))
+                .sorted(Comparator.comparing(SportsmanDto::getName))
                 .collect(Collectors.toList());
 
         dtoList.forEach(System.out::println);
     }
 
-    private static void task6(List<Category> categories) throws IOException, ClassNotFoundException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("categories.dat"))) {
-            oos.writeObject(categories);
+    private static void task6(List<Sport> sports) throws IOException, ClassNotFoundException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("sports.dat"))) {
+            oos.writeObject(sports);
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("categories.dat"))) {
-            List<Category> deserializedCategories = (List<Category>) ois.readObject();
-            deserializedCategories.forEach(category -> {
-                System.out.println(category);
-                category.getElements().forEach(System.out::println);
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("sports.dat"))) {
+            List<Sport> deserializedSports = (List<Sport>) ois.readObject();
+            deserializedSports.forEach(sport -> {
+                System.out.println(sport);
+                sport.getSportsmen().forEach(System.out::println);
             });
         }
     }
 
-    private static void task7(List<Category> categories) {
-        ForkJoinPool customThreadPool = new ForkJoinPool(categories.size());
+    private static void task7(List<Sport> sports) {
+        ForkJoinPool customThreadPool = new ForkJoinPool(sports.size()/2);
 
         customThreadPool.submit(() -> {
-            categories.parallelStream().forEach(category -> {
+            sports.parallelStream().forEach(sport -> {
                 try {
-                    System.out.println("Processing " + category.getName());
+                    System.out.println("Processing " + sport.getName());
                     Thread.sleep(500);
-                    category.printAll();
+                    sport.printAll();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

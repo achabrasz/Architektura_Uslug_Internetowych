@@ -8,14 +8,13 @@ import java.io.Serializable;
 
 @Data
 @Builder
-@Getter
-class ElementDto implements Serializable {
+class SportsmanDto implements Serializable {
     private String name;
-    private int value;
-    private String categoryName;
+    private int rating;
+    private String sport;
 
     @Override
     public String toString() {
-        return "DTO Element: " + name + ", Value: " + value + ", Category: " + categoryName;
+        return "DTO Sportsman: " + name + ", Rating: " + rating + ", Sport: " + sport;
     }
 }

@@ -8,9 +8,9 @@ import java.util.List;
 
 @Data
 @Getter
-class Category implements Serializable {
+class Sport implements Serializable {
     private String name;
-    private List<Element> elements;
+    private List<Sportsman> sportsmen;
 
     @Override
     public String toString() {
@@ -19,6 +19,6 @@ class Category implements Serializable {
 
     public void printAll() {
         System.out.println(this);
-        this.getElements().stream().forEach(System.out::println);
+        this.getSportsmen().stream().forEach(System.out::println);
     }
 }
