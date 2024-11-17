@@ -8,8 +8,8 @@ import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Collectors;
 
-public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+public class Lab1 {
+    public static void run() throws IOException, ClassNotFoundException{
         List<Sport> sports = createData();
 
         System.out.println("Task 2");
