@@ -1,7 +1,10 @@
 package com.example.aui.repositories;
 
 import com.example.aui.entities.Sport;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -10,5 +13,8 @@ import java.util.UUID;
 public interface SportRepository extends JpaRepository<Sport, UUID> {
     Sport findByName(String name);
 
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Sport s WHERE s.name = :name")
     void deleteByName(String name);
 }

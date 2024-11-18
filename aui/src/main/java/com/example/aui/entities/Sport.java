@@ -20,7 +20,7 @@ public class Sport {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "sport", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "sport", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Sportsman> sportsmen;
 
     @Override

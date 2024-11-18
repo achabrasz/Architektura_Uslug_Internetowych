@@ -28,12 +28,16 @@ public class SportsmanService {
         sportsmanRepository.deleteAll();
     }
 
-    public void deleteByName(String name) {
-        sportsmanRepository.deleteByName(name);
+    public Sportsman findByName(String name) {
+        return sportsmanRepository.findByName(name);
     }
 
-    public void deleteBySportName(String sportName) {
-        sportsmanRepository.deleteBySport_Name(sportName);
+    public void delete(Sportsman sportsman) {
+        sportsmanRepository.delete(sportsman);
+    }
+
+    public void delete(List<Sportsman> sportsmen) {
+        sportsmanRepository.deleteAll(sportsmen);
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.aui.services;
 
 import com.example.aui.entities.Sport;
+import com.example.aui.entities.Sportsman;
 import com.example.aui.repositories.SportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,17 +27,16 @@ public class SportService {
         return sportRepository.findByName(name);
     }
 
-    public void deleteByName(String name) {
-        sportsmanService.deleteBySportName(name);
-        sportRepository.deleteByName(name);
-    }
-
     public void deleteAll() {
         sportRepository.deleteAll();
     }
 
     public Sport save(Sport sport) {
         return sportRepository.save(sport);
+    }
+
+    public void delete(Sport sport) {
+        sportRepository.delete(sport);
     }
 }
 

@@ -121,14 +121,16 @@ public class CommandLineApp implements CommandLineRunner {
         System.out.println("Enter sport name:");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
-        sportService.deleteByName(name);
+        var sport = sportService.findByName(name);
+        sportService.delete(sport);
     }
 
     public void deleteSportsman() {
         System.out.println("Enter sportsman name:");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
-        sportsmanService.deleteByName(name);
+        var sportsman = sportsmanService.findByName(name);
+        sportsmanService.delete(sportsman);
     }
 
     public void deleteAllSportsmen() {
