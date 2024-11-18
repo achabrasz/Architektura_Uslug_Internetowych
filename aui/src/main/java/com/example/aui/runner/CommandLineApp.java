@@ -51,6 +51,10 @@ public class CommandLineApp implements CommandLineRunner {
                 deleteSport();
             } else if (option.equals("8")) {
                 deleteSportsman();
+            } else if (option.equals("d1")) {
+                getSportsWithIds();
+            } else if (option.equals("d2")) {
+                getSportsmenWithIds();
             } else if (option.equals("q")) {
                 System.exit(0);
             }
@@ -69,6 +73,8 @@ public class CommandLineApp implements CommandLineRunner {
         options += "[6] Delete All Sportsmen ";
         options += "[7] Delete Sport ";
         options += "[8] Delete Sportsman ";
+        options += "[d1] Get Sports with ids";
+        options += "[d2] Get Sportsmen with ids";
         options += "[q] Quit";
         System.out.println(options);
     }
@@ -140,6 +146,16 @@ public class CommandLineApp implements CommandLineRunner {
     public void deleteAll() {
         sportsmanService.deleteAll();
         sportService.deleteAll();
+    }
+
+    public void getSportsWithIds() {
+        List<Sport> sports = sportService.findAll();
+        sports.forEach(sport -> System.out.println(sport.getId() + " " + sport.getName()));
+    }
+
+    public void getSportsmenWithIds() {
+        List<Sportsman> sportsmen = sportsmanService.findAll();
+        sportsmen.forEach(sportsman -> System.out.println(sportsman.getId() + " " + sportsman.getName()));
     }
 }
 

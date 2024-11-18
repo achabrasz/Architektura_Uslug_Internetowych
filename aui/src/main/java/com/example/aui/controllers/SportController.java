@@ -34,6 +34,12 @@ public class SportController {
                 .collect(Collectors.toList());
     }
 
+    @PostMapping
+    public ResponseEntity<SportDTO> createSport(@RequestBody SportDTO SportDTO) {
+        Sport sport = sportService.save(new Sport(UUID.randomUUID(), SportDTO.getName(), new ArrayList<>()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new SportDTO(sport.getName()));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SportDTO> getSportById(@PathVariable UUID id) {
         Sport sport = sportService.findById(id);
@@ -41,12 +47,6 @@ public class SportController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(new SportDTO(sport.getName()));
-    }
-
-    @PostMapping
-    public ResponseEntity<SportDTO> createSport(@RequestBody SportDTO SportDTO) {
-        Sport sport = sportService.save(new Sport(UUID.randomUUID(), SportDTO.getName(), new ArrayList<>()));
-        return ResponseEntity.status(HttpStatus.CREATED).body(new SportDTO(sport.getName()));
     }
 
     @PutMapping("/{id}")
