@@ -1,10 +1,10 @@
-package com.example.aui.controllers;
+package com.example.Sportsman_Module.Controller;
 
-import com.example.aui.entities.DTO.SportsmanDto;
-import com.example.aui.entities.Sport;
-import com.example.aui.entities.Sportsman;
-import com.example.aui.services.SportService;
-import com.example.aui.services.SportsmanService;
+import com.example.Sportsman_Module.Sportsman.Dto.SportsmanDto;
+import com.example.Sport_Module.Sport.Sport;
+import com.example.Sportsman_Module.Sportsman.Sportsman;
+import com.example.Sport_Module.Service.SportService;
+import com.example.Sportsman_Module.Service.SportsmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

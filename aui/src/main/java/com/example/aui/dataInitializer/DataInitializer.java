@@ -1,9 +1,9 @@
 package com.example.aui.dataInitializer;
 
-import com.example.aui.entities.Sport;
-import com.example.aui.entities.Sportsman;
-import com.example.aui.services.SportService;
-import com.example.aui.services.SportsmanService;
+import com.example.aui.Sport_Module.Sport.Sport;
+import com.example.aui.Sportsman_Module.Sportsman.Sportsman;
+import com.example.aui.Sport_Module.Service.SportService;
+import com.example.aui.Sportsman_Module.Service.SportsmanService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

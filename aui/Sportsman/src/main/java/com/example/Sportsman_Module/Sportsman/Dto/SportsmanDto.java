@@ -1,9 +1,8 @@
-package com.example.aui.entities.DTO;
+package com.example.Sportsman_Module.Sportsman.Dto;
 
 public class SportsmanDto {
     private String name;
     private int rating;
-
     private String sportName;
 
     public SportsmanDto(String name, int rating, String sportName) {

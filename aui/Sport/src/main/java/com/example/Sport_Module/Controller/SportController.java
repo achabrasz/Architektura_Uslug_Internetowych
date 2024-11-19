@@ -1,15 +1,13 @@
-package com.example.aui.controllers;
+package com.example.Sport_Module.Controller;
 
-import com.example.aui.entities.DTO.SportDto;
-import com.example.aui.entities.Sport;
-import com.example.aui.services.SportService;
-import com.example.aui.services.SportsmanService;
+import com.example.Sport_Module.Service.SportService;
+import com.example.Sport_Module.Sport.Dto.SportDto;
+import com.example.Sport_Module.Sport.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,12 +17,10 @@ import java.util.stream.Collectors;
 public class SportController {
 
     private final SportService sportService;
-    private final SportsmanService sportsmanService;
 
     @Autowired
-    public SportController(SportService sportService, SportsmanService sportsmanService) {
+    public SportController(SportService sportService) {
         this.sportService = sportService;
-        this.sportsmanService = sportsmanService;
     }
 
     @GetMapping
@@ -36,7 +32,7 @@ public class SportController {
 
     @PostMapping
     public ResponseEntity<SportDto> createSport(@RequestBody SportDto SportDTO) {
-        Sport sport = sportService.save(new Sport(UUID.randomUUID(), SportDTO.getName(), new ArrayList<>()));
+        Sport sport = sportService.save(new Sport(UUID.randomUUID(), SportDTO.getName()));
         return ResponseEntity.status(HttpStatus.CREATED).body(new SportDto(sport.getName()));
     }
 

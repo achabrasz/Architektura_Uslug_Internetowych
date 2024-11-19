@@ -1,9 +1,13 @@
-package com.example.aui.entities;
+package com.example.Sportsman_Module.Sportsman;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.UUID;
 
@@ -12,6 +16,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"id", "sport_id"})
 public class Sportsman {
     @Id
     private UUID id;
@@ -22,13 +27,7 @@ public class Sportsman {
     @Column(name = "rating")
     private int rating;
 
-    @ManyToOne
-    @JoinColumn(name = "sport_id")
-    private Sport sport;
-
-    @Override
-    public String toString() {
-        return name + " (" + rating + ")" + " " + sport.getName();
-    }
+    @Column(name = "sport_id")
+    private UUID sport_id;
 }
 

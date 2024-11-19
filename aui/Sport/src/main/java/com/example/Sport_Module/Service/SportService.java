@@ -1,7 +1,7 @@
-package com.example.aui.services;
+package com.example.Sport_Module.Service;
 
-import com.example.aui.entities.Sport;
-import com.example.aui.repositories.SportRepository;
+import com.example.Sport_Module.Repository.SportRepository;
+import com.example.Sport_Module.Sport.Sport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,10 @@ import java.util.UUID;
 @Service
 public class SportService {
     private final SportRepository sportRepository;
-    private final SportsmanService sportsmanService;
 
     @Autowired
-    public SportService(SportRepository sportRepository, SportsmanService sportsmanService) {
+    public SportService(SportRepository sportRepository) {
         this.sportRepository = sportRepository;
-        this.sportsmanService = sportsmanService;
     }
 
     public List<Sport> findAll() {

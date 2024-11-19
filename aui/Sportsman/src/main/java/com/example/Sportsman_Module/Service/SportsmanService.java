@@ -1,7 +1,7 @@
-package com.example.aui.services;
+package com.example.Sportsman_Module.Service;
 
-import com.example.aui.entities.Sportsman;
-import com.example.aui.repositories.SportsmanRepository;
+import com.example.Sportsman_Module.Sportsman.Sportsman;
+import com.example.Sportsman_Module.Repository.SportsmanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
