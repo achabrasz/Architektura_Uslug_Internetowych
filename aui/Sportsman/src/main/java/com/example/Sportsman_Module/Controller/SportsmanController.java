@@ -1,10 +1,9 @@
 package com.example.Sportsman_Module.Controller;
 
-import com.example.Sportsman_Module.Sportsman.Dto.SportsmanDto;
-import com.example.Sport_Module.Sport.Sport;
-import com.example.Sportsman_Module.Sportsman.Sportsman;
-import com.example.Sport_Module.Service.SportService;
 import com.example.Sportsman_Module.Service.SportsmanService;
+import com.example.Sportsman_Module.Sportsman.Dto.SportsmanDto;
+import com.example.Sportsman_Module.Sportsman.Sport.Sport;
+import com.example.Sportsman_Module.Sportsman.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
