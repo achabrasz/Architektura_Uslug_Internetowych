@@ -1,19 +1,13 @@
 package com.example.aui.entities.DTO;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SportDTO {
     private String name;
-    private int rating;
-
-    public SportDTO(String name, int rating) {
-        this.name = name;
-        this.rating = rating;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getRating() {
-        return rating;
-    }
 }

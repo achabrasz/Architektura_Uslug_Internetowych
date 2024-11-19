@@ -1,12 +1,12 @@
 package com.example.aui.services;
 
 import com.example.aui.entities.Sport;
-import com.example.aui.entities.Sportsman;
 import com.example.aui.repositories.SportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SportService {
@@ -37,6 +37,10 @@ public class SportService {
 
     public void delete(Sport sport) {
         sportRepository.delete(sport);
+    }
+
+    public Sport findById(UUID id) {
+        return sportRepository.findById(id).orElse(null);
     }
 }
 

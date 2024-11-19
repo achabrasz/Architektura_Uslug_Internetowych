@@ -1,0 +1,47 @@
+### Get all sports
+GET http://localhost:8080/sports
+Accept: application/json
+
+### Get a specific sport by ID
+GET http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f
+Accept: application/json
+
+### Create a new sport
+POST http://localhost:8080/sports
+Content-Type: application/json
+
+{
+  "name": "American Football"
+}
+
+### Update an existing sport
+PUT http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f
+Content-Type: application/json
+
+{
+  "name": "Soccer"
+}
+
+### Delete a sport by ID
+DELETE http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f
+
+### Get all sportsmen
+GET http://localhost:8080/sports/sportsmen
+Accept: application/json
+
+### Get all sportsmen in a specific sport
+GET http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f/sportsmen
+Accept: application/json
+
+### Add a sportsman to a specific sport
+POST http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f/sportsmen
+Content-Type: application/json
+
+{
+  "name": "Pele",
+  "rating": 95,
+  "sportName": "Soccer"
+}
+
+### Delete a specific sportsman
+DELETE http://localhost:8080/sports/sportsmen/555f4da7-cb6b-4757-bcbd-2406fb501f67
