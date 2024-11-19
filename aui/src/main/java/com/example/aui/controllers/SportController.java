@@ -1,6 +1,6 @@
 package com.example.aui.controllers;
 
-import com.example.aui.entities.DTO.SportDTO;
+import com.example.aui.entities.DTO.SportDto;
 import com.example.aui.entities.Sport;
 import com.example.aui.services.SportService;
 import com.example.aui.services.SportsmanService;
@@ -28,36 +28,36 @@ public class SportController {
     }
 
     @GetMapping
-    public List<SportDTO> getAllSports() {
+    public List<SportDto> getAllSports() {
         return sportService.findAll().stream()
-                .map(sport -> new SportDTO(sport.getName()))
+                .map(sport -> new SportDto(sport.getName()))
                 .collect(Collectors.toList());
     }
 
     @PostMapping
-    public ResponseEntity<SportDTO> createSport(@RequestBody SportDTO SportDTO) {
+    public ResponseEntity<SportDto> createSport(@RequestBody SportDto SportDTO) {
         Sport sport = sportService.save(new Sport(UUID.randomUUID(), SportDTO.getName(), new ArrayList<>()));
-        return ResponseEntity.status(HttpStatus.CREATED).body(new SportDTO(sport.getName()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new SportDto(sport.getName()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SportDTO> getSportById(@PathVariable UUID id) {
+    public ResponseEntity<SportDto> getSportById(@PathVariable UUID id) {
         Sport sport = sportService.findById(id);
         if (sport == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(new SportDTO(sport.getName()));
+        return ResponseEntity.ok(new SportDto(sport.getName()));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SportDTO> updateSport(@PathVariable UUID id, @RequestBody SportDTO SportDTO) {
+    public ResponseEntity<SportDto> updateSport(@PathVariable UUID id, @RequestBody SportDto SportDTO) {
         Sport sport = sportService.findById(id);
         if (sport == null) {
             return ResponseEntity.notFound().build();
         }
         sport.setName(SportDTO.getName());
         sportService.save(sport);
-        return ResponseEntity.ok(new SportDTO(sport.getName()));
+        return ResponseEntity.ok(new SportDto(sport.getName()));
     }
 
     @DeleteMapping("/{id}")

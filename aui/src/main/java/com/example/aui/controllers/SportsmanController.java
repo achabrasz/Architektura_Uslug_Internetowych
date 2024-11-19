@@ -1,6 +1,6 @@
 package com.example.aui.controllers;
 
-import com.example.aui.entities.DTO.SportsmanDTO;
+import com.example.aui.entities.DTO.SportsmanDto;
 import com.example.aui.entities.Sport;
 import com.example.aui.entities.Sportsman;
 import com.example.aui.services.SportService;
@@ -28,7 +28,7 @@ public class SportsmanController {
     }
 
     @GetMapping("/{sportId}/sportsmen")
-    public ResponseEntity<List<SportsmanDTO>> getSportsmenBySport(@PathVariable UUID sportId) {
+    public ResponseEntity<List<SportsmanDto>> getSportsmenBySport(@PathVariable UUID sportId) {
         Sport sport = sportService.findById(sportId);
         if (sport == null) {
             return ResponseEntity.notFound().build();
@@ -38,15 +38,15 @@ public class SportsmanController {
         }
         return ResponseEntity.ok(
                 sport.getSportsmen().stream()
-                        .map(sportsman -> new SportsmanDTO(sportsman.getName(), sportsman.getRating(), sport.getName()))
+                        .map(sportsman -> new SportsmanDto(sportsman.getName(), sportsman.getRating(), sport.getName()))
                         .collect(Collectors.toList())
         );
     }
 
     @PostMapping("/{sportId}/sportsmen")
-    public ResponseEntity<SportsmanDTO> addSportsmanToSport(
+    public ResponseEntity<SportsmanDto> addSportsmanToSport(
             @PathVariable UUID sportId,
-            @RequestBody SportsmanDTO SportsmanDTO) {
+            @RequestBody SportsmanDto SportsmanDTO) {
         Sport sport = sportService.findById(sportId);
         if (sport == null) {
             return ResponseEntity.badRequest().build(); // Category does not exist
@@ -55,13 +55,13 @@ public class SportsmanController {
         sport.getSportsmen().add(sportsman);
         sportsmanService.save(sportsman);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new SportsmanDTO(sportsman.getName(), sportsman.getRating(), sport.getName()));
+                .body(new SportsmanDto(sportsman.getName(), sportsman.getRating(), sport.getName()));
     }
 
     @GetMapping("/sportsmen")
-    public List<SportsmanDTO> getAllSportsmen() {
+    public List<SportsmanDto> getAllSportsmen() {
         return sportsmanService.findAll().stream()
-                .map(sportsman -> new SportsmanDTO(sportsman.getName(), sportsman.getRating(), sportsman.getSport().getName()))
+                .map(sportsman -> new SportsmanDto(sportsman.getName(), sportsman.getRating(), sportsman.getSport().getName()))
                 .collect(Collectors.toList());
     }
 
