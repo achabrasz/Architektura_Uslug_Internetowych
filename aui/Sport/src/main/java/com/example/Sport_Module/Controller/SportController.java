@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,10 +18,12 @@ import java.util.stream.Collectors;
 public class SportController {
 
     private final SportService sportService;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public SportController(SportService sportService) {
+    public SportController(SportService sportService, RestTemplate restTemplate) {
         this.sportService = sportService;
+        this.restTemplate = restTemplate;
     }
 
     @GetMapping
@@ -60,9 +63,13 @@ public class SportController {
     public ResponseEntity<Void> deleteSport(@PathVariable UUID id) {
         Sport sport = sportService.findById(id);
         if (sport == null) {
+            System.out.println("Sport not found");
             return ResponseEntity.notFound().build();
         }
+        System.out.println("Deleting sportsmen for sport " + id);
         sportService.delete(sport); // Ensure cascade delete for sportsmen
+        //restTemplate.delete("http://localhost:8082/sportsmen/sport/" + id);
+        System.out.println("Deleted sportsmen for sport " + id);
         return ResponseEntity.noContent().build();
     }
 }

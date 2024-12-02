@@ -24,7 +24,8 @@
 	<modules>
 		<module>Sport</module>
 		<module>Sportsman</module>
-	</modules>
+        <module>Gateway</module>
+    </modules>
 	<scm>
 		<connection/>
 		<developerConnection/>

@@ -1,6 +1,10 @@
 package com.example.Sportsman_Module.Sportsman.Sport;
 
-import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public record Sport (UUID id, String name) {
+@Getter
+@AllArgsConstructor
+public class Sport {
+    String name;
 }

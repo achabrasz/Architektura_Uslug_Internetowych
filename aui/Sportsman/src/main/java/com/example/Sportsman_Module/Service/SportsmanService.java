@@ -1,7 +1,7 @@
 package com.example.Sportsman_Module.Service;
 
-import com.example.Sportsman_Module.Sportsman.Sportsman;
 import com.example.Sportsman_Module.Repository.SportsmanRepository;
+import com.example.Sportsman_Module.Sportsman.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +41,17 @@ public class SportsmanService {
         return sportsmanRepository.findById(id).orElse(null);
     }
 
+    public List<Sportsman> findBySportId(UUID sportId) {
+        return sportsmanRepository.findBySportId(sportId);
+    }
+
     public void delete(List<Sportsman> sportsmen) {
         sportsmanRepository.deleteAll(sportsmen);
+    }
+
+    public void deleteAllBySportId(UUID sportId) {
+        System.out.println("Invoking repository method");
+        sportsmanRepository.deleteAllBySportId(sportId);
     }
 }
 

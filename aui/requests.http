@@ -1,13 +1,13 @@
 ### Get all sports
-GET http://localhost:8080/sports
+GET http://localhost:8083/sports
 Accept: application/json
 
 ### Get a specific sport by ID
-GET http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f
+GET http://localhost:8083/sports/123e4567-e89b-12d3-a456-426614174000
 Accept: application/json
 
 ### Create a new sport
-POST http://localhost:8080/sports
+POST http://localhost:8083/sports
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Update an existing sport
-PUT http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f
+PUT http://localhost:8083/sports/123e4567-e89b-12d3-a456-426614174000
 Content-Type: application/json
 
 {
@@ -23,18 +23,18 @@ Content-Type: application/json
 }
 
 ### Delete a sport by ID
-DELETE http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f
+DELETE http://localhost:8083/sports/123e4567-e89b-12d3-a456-426614174000
 
 ### Get all sportsmen
-GET http://localhost:8080/sports/sportsmen
+GET http://localhost:8083/sportsmen
 Accept: application/json
 
 ### Get all sportsmen in a specific sport
-GET http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f/sportsmen
+GET http://localhost:8083/sportsmen/123e4567-e89b-12d3-a456-426614174000
 Accept: application/json
 
 ### Add a sportsman to a specific sport
-POST http://localhost:8080/sports/13c7480e-3c14-41ca-9a0a-766c2824d00f/sportsmen
+POST http://localhost:8083/sportsmen/123e4567-e89b-12d3-a456-426614174000
 Content-Type: application/json
 
 {
@@ -44,4 +44,4 @@ Content-Type: application/json
 }
 
 ### Delete a specific sportsman
-DELETE http://localhost:8080/sports/sportsmen/555f4da7-cb6b-4757-bcbd-2406fb501f67
+DELETE http://localhost:8082/sportsmen/{id}
