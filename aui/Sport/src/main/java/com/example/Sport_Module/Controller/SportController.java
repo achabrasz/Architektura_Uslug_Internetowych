@@ -67,8 +67,8 @@ public class SportController {
             return ResponseEntity.notFound().build();
         }
         System.out.println("Deleting sportsmen for sport " + id);
+        restTemplate.delete("http://localhost:8083/sportsmen/sport/" + id);
         sportService.delete(sport); // Ensure cascade delete for sportsmen
-        //restTemplate.delete("http://localhost:8082/sportsmen/sport/" + id);
         System.out.println("Deleted sportsmen for sport " + id);
         return ResponseEntity.noContent().build();
     }

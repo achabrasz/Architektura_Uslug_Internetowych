@@ -2,7 +2,6 @@ package com.example.Sportsman_Module.Controller;
 
 import com.example.Sportsman_Module.Service.SportsmanService;
 import com.example.Sportsman_Module.Sportsman.Dto.SportsmanDto;
-import com.example.Sportsman_Module.Sportsman.Sport.Sport;
 import com.example.Sportsman_Module.Sportsman.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,8 +40,10 @@ public class SportsmanController {
     public ResponseEntity<SportsmanDto> addSportsmanToSport(
             @PathVariable UUID sportId,
             @RequestBody SportsmanDto SportsmanDTO) {
-        var sport = restTemplate.getForObject("http://localhost:8083/sports/" + sportId, Sport.class);
+        System.out.println("Trying to add sportsmen to a sport");
+        String sport = restTemplate.getForObject("http://localhost:8083/sports/" + sportId, String.class);
         if (sport == null) {
+            System.out.println("Sport not found");
             return ResponseEntity.badRequest().build(); // Category does not exist
         }
         Sportsman sportsman = new Sportsman(UUID.randomUUID(), SportsmanDTO.getName(), SportsmanDTO.getRating(), sportId);

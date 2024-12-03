@@ -1,7 +1,10 @@
 package com.example.Sportsman_Module.Repository;
 
 import com.example.Sportsman_Module.Sportsman.Sportsman;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,5 +18,8 @@ public interface SportsmanRepository extends JpaRepository<Sportsman, UUID> {
     
     void deleteAll();
 
+    @Query("delete from Sportsman s where s.sportId = :sportId")
+    @Modifying
+    @Transactional
     void deleteAllBySportId(UUID sportId);
 }
