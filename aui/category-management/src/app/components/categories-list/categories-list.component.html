@@ -1,0 +1,31 @@
+<h2>Categories</h2>
+
+<!-- Add Category Button -->
+<button (click)="addCategory()" style="margin-bottom: 15px;">Add New Category</button>
+
+<!-- Categories Table -->
+<table border="1" cellspacing="0" cellpadding="10" style="width: 100%;">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Iterate over categories -->
+  <tr *ngFor="let category of categories; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ category.name }}</td>
+    <td>
+      <button (click)="viewDetails(category.id)">Details</button>
+      <button (click)="editCategory(category.id)">Edit</button>
+      <button (click)="deleteCategory(category.id)">Delete</button>
+    </td>
+  </tr>
+  <!-- Display when no categories exist -->
+  <tr *ngIf="categories.length === 0">
+    <td colspan="3" style="text-align: center;">No categories available.</td>
+  </tr>
+  </tbody>
+</table>

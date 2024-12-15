@@ -9,11 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/sports")
 public class SportController {
 
@@ -27,10 +28,8 @@ public class SportController {
     }
 
     @GetMapping
-    public List<SportDto> getAllSports() {
-        return sportService.findAll().stream()
-                .map(sport -> new SportDto(sport.getName()))
-                .collect(Collectors.toList());
+    public List<Sport> getAllSports() {
+        return new ArrayList<>(sportService.findAll());
     }
 
     @PostMapping

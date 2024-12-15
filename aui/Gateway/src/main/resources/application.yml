@@ -1,4 +1,6 @@
 spring:
+  main:
+    web-application-type: reactive  # Enable reactive web stack (needed for Spring Cloud Gateway)
   cloud:
     gateway:
       routes:
