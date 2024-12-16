@@ -9,12 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/sportsmen")
 public class SportsmanController {
 
@@ -27,13 +28,20 @@ public class SportsmanController {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping("/{sportId}")
-    public ResponseEntity<List<SportsmanDto>> getSportsmenBySport(@PathVariable UUID sportId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Sportsman> getSportsmanById(@PathVariable UUID id) {
+        Sportsman sportsman = sportsmanService.findById(id);
+        if (sportsman == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(sportsman);
+    }
+
+    @GetMapping("/sport/{sportId}")
+    public ResponseEntity<List<Sportsman>> getSportsmenBySport(@PathVariable UUID sportId) {
         List <Sportsman> sportsmen = sportsmanService.findBySportId(sportId);
         return ResponseEntity.ok(
-                sportsmen.stream()
-                        .map(sportsman -> new SportsmanDto(sportsman.getName(), sportsman.getRating(), sportsman.getSportName(restTemplate)))
-                        .collect(Collectors.toList())
+                new ArrayList<>(sportsmen)
         );
     }
 
@@ -58,6 +66,18 @@ public class SportsmanController {
         return sportsmanService.findAll().stream()
                 .map(sportsman -> new SportsmanDto(sportsman.getName(), sportsman.getRating(), sportsman.getSportName(restTemplate)))
                 .collect(Collectors.toList());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Sportsman> updateSportsman(@PathVariable UUID id, @RequestBody SportsmanDto SportsmanDTO) {
+        Sportsman sportsman = sportsmanService.findById(id);
+        if (sportsman == null) {
+            return ResponseEntity.notFound().build();
+        }
+        sportsman.setName(SportsmanDTO.getName());
+        sportsman.setRating(SportsmanDTO.getRating());
+        sportsmanService.save(sportsman);
+        return ResponseEntity.ok(sportsman);
     }
 
     @DeleteMapping("/{id}")

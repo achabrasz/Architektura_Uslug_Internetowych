@@ -11,12 +11,13 @@ export class ElementService {
   constructor(private http: HttpClient) {}
 
   getElementsByCategory(categoryId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${categoryId}`);
+    return this.http.get(`${this.apiUrl}/sport/${categoryId}`);
   }
 
   getElementById(categoryId: string, elementId: string): Observable<any> {
     console.log(`${this.apiUrl}/${categoryId}/${elementId}`);
-    return this.http.get(`${this.apiUrl}/${categoryId}/${elementId}`);
+    console.log(elementId);
+    return this.http.get(`${this.apiUrl}/${elementId}`);
   }
 
   createElement(categoryId: string, element: any): Observable<any> {
@@ -24,10 +25,10 @@ export class ElementService {
   }
 
   updateElement(categoryId: string, elementId: string, element: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${categoryId}/${elementId}`, element);
+    return this.http.put(`${this.apiUrl}/${elementId}`, element);
   }
 
   deleteElement(categoryId: string, elementId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${categoryId}/${elementId}`);
+    return this.http.delete(`${this.apiUrl}/${elementId}`);
   }
 }

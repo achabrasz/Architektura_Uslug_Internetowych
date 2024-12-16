@@ -44,4 +44,4 @@ Content-Type: application/json
 }
 
 ### Delete a specific sportsman
-DELETE http://localhost:8082/sportsmen/{id}
+DELETE http://localhost:8083/sportsmen/f75e8960-59ec-4b60-8e5a-a8f12601abd2

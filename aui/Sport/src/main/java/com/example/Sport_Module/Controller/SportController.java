@@ -3,6 +3,7 @@ package com.example.Sport_Module.Controller;
 import com.example.Sport_Module.Service.SportService;
 import com.example.Sport_Module.Sport.Dto.SportDto;
 import com.example.Sport_Module.Sport.Sport;
+import com.example.Sport_Module.Sportsman.Sportsman;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/sports")
 public class SportController {
 
@@ -45,6 +46,18 @@ public class SportController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(new SportDto(sport.getName()));
+    }
+
+    @GetMapping("/{sportId}/sportsmen/{id}")
+    public ResponseEntity<Sportsman> getSportsmanBySport(@PathVariable UUID sportId, @PathVariable UUID id) {
+        Sportsman sportsman = restTemplate.getForObject("http://localhost:8083/sportsmen/" + id, Sportsman.class);
+        if (sportsman == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (!sportsman.getSportId().equals(sportId)) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(sportsman);
     }
 
     @PutMapping("/{id}")

@@ -1,8 +1,24 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+
 spring:
-  main:
-    web-application-type: reactive  # Enable reactive web stack (needed for Spring Cloud Gateway)
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200, http://localhost:4200/**"  # Allow Angular app
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+            max-age: 3600
       routes:
         - id: sport-service
           uri: http://localhost:8081
