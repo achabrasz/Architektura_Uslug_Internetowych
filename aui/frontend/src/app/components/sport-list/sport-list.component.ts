@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule
-import { CategoryService } from '../../services/category.service';
+import { SportService } from '../../services/sport.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true, // Ensure the component is standalone
   imports: [CommonModule], // Import CommonModule to use *ngFor and *ngIf
-  templateUrl: './categories-list.component.html',
+  templateUrl: './sport-list.component.html',
 })
-export class CategoriesListComponent implements OnInit {
+export class SportListComponent implements OnInit {
   categories: any[] = [];
 
-  constructor(private categoryService: CategoryService, private router: Router) {}
+  constructor(private categoryService: SportService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchCategories();

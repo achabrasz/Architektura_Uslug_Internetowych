@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import { CategoryService } from '../../services/category.service';
-import { ElementService } from '../../services/element.service';
+import { SportService } from '../../services/sport.service';
+import { SportsmanService } from '../../services/sportsman.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
@@ -9,16 +9,16 @@ import {CommonModule} from '@angular/common';
   selector: 'app-category-details',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './category-details.component.html',
+  templateUrl: './sport-details.component.html',
 })
-export class CategoryDetailsComponent implements OnInit {
+export class SportDetailsComponent implements OnInit {
   category: any;
   elements: any[] = [];
   categoryId: string = '';
 
   constructor(
-    private categoryService: CategoryService,
-    private elementService: ElementService,
+    private categoryService: SportService,
+    private elementService: SportsmanService,
     private route: ActivatedRoute,
     public router: Router
   ) {}

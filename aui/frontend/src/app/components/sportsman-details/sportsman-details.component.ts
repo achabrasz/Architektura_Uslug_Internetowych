@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ElementService } from '../../services/element.service';
+import { SportsmanService } from '../../services/sportsman.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
@@ -8,15 +8,15 @@ import {CommonModule} from '@angular/common';
   selector: 'app-element-details',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './element-details.component.html',
+  templateUrl: './sportsman-details.component.html',
 })
-export class ElementDetailsComponent implements OnInit {
+export class SportsmanDetailsComponent implements OnInit {
   element: any;
   categoryId: string = '';
   elementId: string = '';
 
   constructor(
-    private elementService: ElementService,
+    private elementService: SportsmanService,
     private route: ActivatedRoute,
     public router: Router
   ) {}

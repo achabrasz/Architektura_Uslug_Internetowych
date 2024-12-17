@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ElementService } from '../../services/element.service';
+import { SportsmanService } from '../../services/sportsman.service';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
@@ -8,9 +8,9 @@ import {CommonModule} from '@angular/common';
   selector: 'app-element-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './element-form.component.html',
+  templateUrl: './sportsman-form.component.html',
 })
-export class ElementFormComponent implements OnInit {
+export class SportsmanFormComponent implements OnInit {
   form: FormGroup;
   isEditMode: boolean = false;
   categoryId: string = '';
@@ -18,7 +18,7 @@ export class ElementFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private elementService: ElementService,
+    private elementService: SportsmanService,
     private route: ActivatedRoute,
     public router: Router
   ) {

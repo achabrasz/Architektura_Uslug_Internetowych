@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class CategoryService {
+export class SportService {
   private apiUrl = 'http://localhost:8083/sports'; // Gateway endpoint for categories
 
   constructor(private http: HttpClient) {}

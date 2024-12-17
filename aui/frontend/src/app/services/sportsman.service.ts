@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ElementService {
+export class SportsmanService {
   private apiUrl = 'http://localhost:8083/sportsmen'; // Gateway endpoint for elements
 
   constructor(private http: HttpClient) {}

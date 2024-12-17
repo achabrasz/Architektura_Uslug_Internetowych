@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryService } from '../../services/category.service';
+import { SportService } from '../../services/sport.service';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
@@ -8,16 +8,16 @@ import {CommonModule} from '@angular/common';
   selector: 'app-category-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './category-form.component.html',
+  templateUrl: './sport-form.component.html',
 })
-export class CategoryFormComponent implements OnInit {
+export class SportFormComponent implements OnInit {
   form: FormGroup;
   isEditMode: boolean = false;
   categoryId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private categoryService: CategoryService,
+    private categoryService: SportService,
     private route: ActivatedRoute,
     public router: Router
   ) {
