@@ -1,7 +1,7 @@
-<h2>Category: {{ category?.name }}</h2>
-<button routerLink="/categories/{{ categoryId }}/elements/new">Add Element</button>
+<h2>Sport: {{ category?.name }}</h2>
+<button routerLink="/categories/{{ categoryId }}/elements/new">Add Sportsman</button>
 
-<h3>Elements:</h3>
+<h3>Sportsman:</h3>
 <ul>
   <li *ngFor="let element of elements">
     {{ element.name }} - Rating: {{ element.rating }}
@@ -10,4 +10,4 @@
   </li>
 </ul>
 
-<button (click)="router.navigate(['/'])">Back to Categories</button>
+<button (click)="router.navigate(['/'])">Back to Sports</button>
