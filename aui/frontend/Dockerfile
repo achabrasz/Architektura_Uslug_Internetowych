@@ -1,14 +1,12 @@
-# Use Node.js to build the Angular app
-FROM node:18 AS builder
+FROM node:20 AS build
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
+RUN npx ngcc --properties es2023 browser module main --first-only --create-ivy-entry-points
 COPY . .
-RUN npm run build --prod
-
-# Use NGINX to serve the Angular app
-FROM nginx:alpine
-COPY --from=builder /app/dist/frontend /usr/share/nginx/html
+RUN npm run build
+FROM nginx:stable
+COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
 

@@ -21,11 +21,11 @@ spring:
             max-age: 3600
       routes:
         - id: sport-service
-          uri: http://localhost:8081
+          uri: http://sport:8081
           predicates:
             - Path=/sports/**
         - id: sportsmen-service
-          uri: http://localhost:8082
+          uri: http://sportsman:8082
           predicates:
             - Path=/sportsmen/**
   application:

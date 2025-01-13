@@ -1,33 +1,99 @@
 version: '3.8'
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "4200:80"
-
-  gateway:
-    build:
-      context: ./Gateway
-      dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
-    depends_on:
-      - sport
-      - sportsman
-
   sport:
     build:
       context: ./Sport
       dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://sport-db:5432/sport
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+    container_name: sport
     ports:
       - "8081:8081"
+    depends_on:
+      - sport-db
+    networks:
+      - mynetwork
 
   sportsman:
     build:
       context: ./Sportsman
       dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://sportsman-db:5432/sportsman
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+    container_name: sportsman
     ports:
       - "8082:8082"
+    depends_on:
+      - sportsman-db
+    networks:
+      - mynetwork
 
+  gateway:
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    restart: always
+    container_name: gateway
+    ports:
+      - "8083:8083"
+    networks:
+      - mynetwork
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    container_name: frontend
+    environment:
+      API_URL: http://gateway:8083/
+    ports:
+      - "4200:80"
+    networks:
+      - mynetwork
+
+  sport-db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: sport
+      PGDATA: /var/lib/postgresql/data/data
+    ports:
+      - "5433:5432"
+    volumes:
+      - sport-data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+  sportsman-db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: sportsman
+      PGDATA: /var/lib/postgresql/data/data
+    ports:
+      - "5434:5432"
+    volumes:
+      - sportsman-data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+volumes:
+  sport-data:
+  sportsman-data:
+
+networks:
+  mynetwork:
+    driver: bridge
